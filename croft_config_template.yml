@@ -1,0 +1,7 @@
+# Croft config template
+# copy and edit your own config file, and refer it from the command line like this:
+# ./croft -config=/path/to/croft/config.yml
+listen_port_udp: 1700
+listen_address_udp: 0.0.0.0
+network_udp: udp4 #must be "udp", "udp4" or "udp6"
+amqp_uri: amqp://guest:guest@localhost:5672

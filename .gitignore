@@ -29,3 +29,4 @@ _testmain.go
 
 .DS_Store
 croft
+croft_config.yml

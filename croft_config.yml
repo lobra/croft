@@ -1,5 +1,0 @@
-# Croft config
-listen_port_udp: 1700
-listen_address_udp: 0.0.0.0
-network_udp: udp4 #must be "udp", "udp4" or "udp6"
-amqp_uri: amqp://guest:guest@localhost:5672
