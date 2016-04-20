@@ -15,18 +15,18 @@ type Config struct {
 	AMQPUri          string `yaml:"amqp_uri"`
 }
 
-func (c Config) ParseYamlFile(configFilePath string) error {
+func (c *Config) ParseYamlFile(configFilePath string) error {
 	cfgData, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
 		log.Fatalf("error reading %s: %v", configFilePath, err)
 		return err
 	}
-	err = yaml.Unmarshal(cfgData, &c)
+	err = yaml.Unmarshal(cfgData, c)
 	if err != nil {
 		log.Fatalf("error parsing %s: %v", configFilePath, err)
 		return err
 	}
-	log.Printf("Croft config:\n%+v\n\n", config)
+	log.Printf("Croft config:\n%+v\n\n", c)
 	return nil
 }
 
