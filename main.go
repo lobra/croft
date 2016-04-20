@@ -16,7 +16,7 @@ var (
 func main() {
 	log.Print("Croft is ALIVE")
 
-	//// go run lobra/croft/*.go -config=wepick/mqtt2orion/mqtt2orion.yml
+	//// go run */*.go -config=croft_config.yml
 	var configFilePath string
 	flag.StringVar(&configFilePath, "config", "/non/existent/filez", "the YAML config file")
 	flag.Parse()
