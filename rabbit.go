@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"log"
-	"os"
 	"time"
 
 	"github.com/streadway/amqp"
@@ -24,7 +23,8 @@ type RabbitPublisher struct {
 func ConnectRabbitPublisher() (Publisher, error) {
 	var err error
 	for i := 0; i < RABBIT_ATTEMPTS; i++ {
-		uri := os.Getenv("AMQP_URI")
+		//uri := os.Getenv("AMQP_URI")
+		uri := config.AMQPUri
 		conn, err := amqp.Dial(uri)
 		if err != nil {
 			log.Printf("Failed to connect: %s", err.Error())

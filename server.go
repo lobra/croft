@@ -15,12 +15,14 @@ import (
 )
 
 func readUDPMessages(port int, messages chan interface{}) {
-	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf("0.0.0.0:%d", port))
+	//addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf("0.0.0.0:%d", port))
+	addr, err := net.ResolveUDPAddr(config.NetworkUDP, fmt.Sprintf("%s:%d", config.ListenAddressUDP, port))
 	if err != nil {
 		log.Fatalf("Failed to resolve address: %s", err.Error())
 	}
 
-	listener, err := net.ListenUDP("udp", addr)
+	//listener, err := net.ListenUDP("udp", addr)
+	listener, err := net.ListenUDP(config.NetworkUDP, addr)
 	if err != nil {
 		log.Fatalf("Failed to start UDP server: %s", err.Error())
 	}

@@ -1,11 +1,41 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+	"io/ioutil"
 	"log"
+
+	"gopkg.in/yaml.v2"
+)
+
+var (
+	config Config
 )
 
 func main() {
 	log.Print("Croft is ALIVE")
+
+	//// go run lobra/croft/*.go -config=wepick/mqtt2orion/mqtt2orion.yml
+	var configFilePath string
+	flag.StringVar(&configFilePath, "config", "/non/existent/filez", "the YAML config file")
+	flag.Parse()
+	cfgData, err := ioutil.ReadFile(configFilePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	config = Config{}
+	err = yaml.Unmarshal([]byte(cfgData), &config)
+	if err != nil {
+		log.Fatalf("error: %v", err)
+	}
+	/*
+		if err = config.Parse(cfgData); err != nil {
+			log.Fatal(err)
+		}
+	*/
+	fmt.Printf("config:\n%+v\n\n", config)
 
 	publisher, err := connectPublisher()
 	if err != nil {
@@ -13,7 +43,7 @@ func main() {
 	}
 
 	messages := make(chan interface{})
-	go readUDPMessages(1700, messages)
+	go readUDPMessages(config.ListenPortUDP, messages)
 	for msg := range messages {
 		err = publisher.Publish(msg)
 		if err != nil {
