@@ -16,28 +16,11 @@ func main() {
 	var configFilePath string
 	flag.StringVar(&configFilePath, "config", "/non/existent/filez", "the YAML config file")
 	flag.Parse()
-	/*
-		cfgData, err := ioutil.ReadFile(configFilePath)
-		if err != nil {
-			log.Fatal(err)
-		}
-	*/
+
 	config = Config{}
 	if err := config.ParseYamlFile(configFilePath); err != nil {
 		log.Fatal(err)
 	}
-	/*
-		err = yaml.Unmarshal([]byte(cfgData), &config)
-		if err != nil {
-			log.Fatalf("error: %v", err)
-		}
-	*/
-	/*
-		if err = config.Parse(cfgData); err != nil {
-			log.Fatal(err)
-		}
-	*/
-	//fmt.Printf("Croft config:\n%+v\n\n", config)
 
 	publisher, err := connectPublisher()
 	if err != nil {

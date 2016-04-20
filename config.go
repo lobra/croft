@@ -29,16 +29,3 @@ func (c *Config) ParseYamlFile(configFilePath string) error {
 	log.Printf("Croft config:\n%+v\n\n", c)
 	return nil
 }
-
-/*
-func (c Config) Parse(data []byte) error {
-	err := yaml.Unmarshal(data, &c)
-	if err != nil {
-		log.Fatalf("error: %v", err)
-	}
-	//err := yaml.Unmarshal(data, &c)
-	//fmt.Printf("- - - %s\n", data)
-	fmt.Printf("- - - %+v\n", c)
-	return nil
-}
-*/
